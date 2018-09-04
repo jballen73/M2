@@ -2,6 +2,8 @@ plugins {
     id 'java'
 }
 
+defaultTasks 'jar'
+
 repositories {
    flatDir {
        dirs 'lib'
