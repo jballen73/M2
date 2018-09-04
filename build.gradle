@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+defaultTasks 'jar'
+
+repositories {
+   flatDir {
+       dirs 'lib'
+   }
+}
+
+configurations {
+    extraLibs
+}
+
+dependencies {
+   compile name: 'resources'
+   extraLibs group: 'edu.cs2335.antlab.pkg3', name: 'resources'
+}
+
+jar {
+    manifest {
+        attributes("Main-Class": "edu.gatech.oad.antlab.pkg1.AntLabMain")
+    }
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+version = '1.0.0'
